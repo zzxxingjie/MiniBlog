@@ -27,4 +27,6 @@
 	<h2>4.运行</h2>
 	<ul>
 		<li>python run.py</li>
+	<li>管理员账号：admin@163.com；密码：111111</li>
+		<li>会员：luxiaofeng@163.com；密码：111111</li>
 	</ul>
