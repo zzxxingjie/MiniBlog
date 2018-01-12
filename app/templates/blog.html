@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}博客内容{% endblock %}
+{% block styles%}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="/static/css/blog.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="blog">
+		<div class="article">
+			<h1 class="title">{{ blog.title }}</h1>
+			<div class="author">
+				<a class="avatar" href="">
+					<img src="{{ blog.author.avatar }}">
+				</a>
+				<div class="info">
+					<a href="">{{ blog.author.nickname }}</a>
+					<a class="btn btn-success follow">关注</a>
+					<div class="meta">
+						<span>{{ blog.create_at }}</span>
+						<span>阅读 {{ blog.read_times }}</span>
+						<span>评论 {{ blog.comments.count() }}</span>
+						<span>喜欢 {{ blog.like }}</span>
+					</div>
+				</div>						
+			</div>
+			<div class="content">
+				{{ blog.body }}
+			</div>
+			<div class="comment_list">
+				<div>
+					{% if g.user.is_authenticated %}
+					<form role="form" method="post">
+						{{ form.hidden_tag() }}
+						{{ form.body(class="form-control", rows='4') }}
+						<br>
+						<button type="submit" class="btn btn-success">评论</button>
+					</form>
+					{% else %}
+					<a class="btn btn-success" href="{{ url_for('login') }}">登陆后评论</a>
+					{% endif %}
+				</div>
+				<div class="normal_comment_list">
+					{% for comment in blog.comments %}
+					<div class="comment">
+						<div class="author" style="margin: 10px 0 20px;">
+							<a class="avatar" href=""><img src="{{ comment.reviewer.avatar }}"></a>
+							<div class="info">
+								<a class="nickname" href="">
+									{{ comment.reviewer.nickname }}
+								</a>
+								<span class="time">{{ comment.create_at }}</span>
+							</div>	
+						</div>
+						<div class="comment_body">
+							{{ comment.body }}
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

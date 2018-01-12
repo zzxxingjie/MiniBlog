@@ -1,0 +1,44 @@
+{% extends "base2.html" %}
+
+{% block title %}系统博客-MiniBlog
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div>
+		<ol class="breadcrumb">
+			<li><a href="{{ url_for('admin') }}">后台主页</a></li>
+			<li class="active">博客列表</li>
+		</ol>
+	</div>
+	<div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>标签</th>
+					<th>题目</th>
+					<th>作者</th>
+					<th>发布时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for blog in blogs %}
+				<tr>
+					<td>{{ blog.tag }}</td>
+					<td><a target="_blank" href="{{ url_for('blog', blog_id = blog.id) }}">{{ blog.title }}</a></td>
+					<td><a href="">{{ blog.author.nickname }}</a></td>
+					<td>{{ blog.create_at }}</td>
+					<td>
+						<a href="{{ url_for('delete_blog', blog_id=blog.id) }}" onclick="return confirm('确定删除此博客?')">删除</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div class="pagination">
+		{{ macros.pagination_widget(pagination,'.blog_list') }}
+	</div>
+</div>
+{% endblock %}

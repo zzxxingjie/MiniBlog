@@ -1,0 +1,42 @@
+{% extends "base2.html" %}
+
+{% block title %}系统评论-MiniBlog
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div>
+		<ol class="breadcrumb">
+			<li><a href="{{ url_for('admin') }}">后台主页</a></li>
+			<li class="active">评论列表</li>
+		</ol>
+	</div>
+	<div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>所在博客</th>
+					<th>内容</th>
+					<th>回复者</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for comment in comments %}
+				<tr>
+					<td><a target="_blank" href="{{ url_for('blog',blog_id = comment.post.id) }}">{{ comment.post.title }}</a></td>
+					<td>{{ comment.body }}</td>
+					<td><a href="">{{ comment.reviewer.nickname }}</a></td>
+					<td>
+						<a href="{{ url_for('delete_comment', comment_id=comment.id)}}" onclick="return confirm('确定删除此评论?')">删除</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div class="pagination">
+		{{ macros.pagination_widget(pagination,'.comment_list') }}
+	</div>
+</div>
+{% endblock %}

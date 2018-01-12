@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>注册-Micblog</title>
+	<link rel="shortcut icon" href="/static/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="/static/css/login.css">
+</head>
+<body>
+	<div class="container">
+		<div class="logo"><a href="{{ url_for('index') }}"><img src="/static/img/logo.png"></a></div>
+		<div class="login-page">
+			<header class="header"><h1>注 册</h1></header>
+			<form class="form" method="post">
+				{{ form.hidden_tag() }}
+				{{ form.nickname(placeholder="昵称") }}
+				{% for error in form.errors.nickname %}<p class="error">* {{ error }}</p>{% endfor %}
+				{{ form.email(placeholder="邮箱") }}
+				{% for error in form.errors.email %}<p class="error">* {{ error }}</p>{% endfor %}
+				{{ form.password(placeholder="密码") }}
+				{% for error in form.errors.password %}<p class="error">* {{ error }}</p>{% endfor %}
+				<button type="submit">注册</button>
+				<p class="message">已有账户 <a href="{{ url_for('login') }}">立刻登录</a></p>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

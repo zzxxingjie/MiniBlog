@@ -1,0 +1,44 @@
+{% extends "base2.html" %}
+
+{% block title %}系统用户-MiniBlog
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div>
+		<ol class="breadcrumb">
+			<li><a href="{{ url_for('admin') }}">后台主页</a></li>
+			<li class="active">系统用户</li>
+		</ol>
+	</div>
+	<div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>昵称</th>
+					<th>邮箱</th>
+					<th>注册时间</th>
+					<th>已有博客</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+				<tr>
+					<td><a href="">{{ user.nickname }}</a></td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.create_at }}</td>
+					<td>{{ user.blogs.count() }}</td>
+					<td>
+						<a href="{{ url_for('delete_user', user_id=user.id)}}" onclick="return confirm('确定删除此用户?')">删除</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div class="pagination">
+		{{ macros.pagination_widget(pagination,'.user_list') }}
+	</div>
+</div>
+{% endblock %}

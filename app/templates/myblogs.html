@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}我的博客{% endblock %}
+{% block content %}
+<div class="container">
+	<table class="table table-striped">
+		<a class="btn btn-success" target="_blank" href="{{ url_for('publish', user_id = g.user.id) }}">新建</a>
+		<thead>
+			<tr>
+				<th>标签</th>
+				<th>题目</th>
+				<th>发布时间</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for blog in blogs %}
+			<tr>
+				<td>{{ blog.tag }}</td>
+				<td><a target="_blank" href="{{ url_for('blog', blog_id = blog.id) }}" >{{ blog.title }}</a></td>
+				<td>{{ blog.create_at }}</td>
+				<td>
+					<a href="{{ url_for('delete_myblog', blog_id = blog.id) }}" onclick="return confirm('确定删除?')">删除</a>
+					<a href="{{ url_for('update_blog', blog_id = blog.id) }}">修改</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<div class="pagination">
+		{{ macros.pagination_widget(pagination,'.myblogs') }}
+	</div>
+</div>
+{% endblock %}

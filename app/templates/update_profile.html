@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}更改个人信息-MiniBlog
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div>
+		<ol class="breadcrumb">
+			<li><a href="{{ url_for('profile', user_id = g.user.id) }}">个人信息</a></li>
+			<li class="active">更改</li>
+		</ol>
+	</div>
+	<div>
+		<form method="post" class="form">
+			{{ form.hidden_tag() }}
+			
+			<div class="form-group">
+				<label>个人简介：</label>
+				{{ form.about_me(class_="form-control", rows ='5') }}
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-default">保存</button>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}

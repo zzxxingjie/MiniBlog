@@ -1,0 +1,44 @@
+{% extends "bootstrap/base.html" %}
+{% import "mac.html" as macros %}
+{% block title %}?{% endblock %}
+{% block styles %}
+{{ super() }}
+<link rel="shortcut icon" href="/static/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand">MiniBlog</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a href="{{ url_for('index') }}">主页</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right"> 
+			{% if g.user.is_authenticated %}
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<img src="{{ g.user.avatar }}" class="img-circle" style="width: 20px;">
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="{{ url_for('profile', user_id = current_user.id) }}">设置</a></li>
+					<li><a href="{{ url_for('publish', user_id = current_user.id) }}">写博客</a></li>
+					<li><a href="{{ url_for('myblogs') }}">我的博客</a></li>
+					<li><a href="{{ url_for('mycomments') }}">我的评论</a></li>
+					<li><a href="{{ url_for('logout') }}">退出</a></li>
+				</ul>
+			</li>
+			{% else %}
+			<li><a href="{{ url_for('login') }}">登录</a></li>
+			<li><a href="{{ url_for('sign_up') }}">注册</a></li> 	
+			{% endif %}
+			{% if g.user.is_authenticated and g.user.admin==1 %}
+			<li><a href="{{ url_for('admin') }}">后台</a></li>
+			{% endif %}
+		</ul>
+	</div>
+</div>
+{% endblock %}
+{% block content %}{% endblock %}

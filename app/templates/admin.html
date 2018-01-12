@@ -1,0 +1,32 @@
+{% extends "base2.html" %}
+
+{% block title %}后台-MiniBlog
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style type="text/css">
+.admin_list{
+	margin: 0;
+	padding: 0;
+}	
+.admin_list li{
+	margin: 10px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<ol class="breadcrumb">
+		<li class="active">博客系统后台管理</li>
+	</ol>
+	<div>
+		<ul class="admin_list">
+			<li><a href="{{ url_for('user_list') }}">1.用户管理</a></li>
+			<li><a href="{{ url_for('blog_list') }}">2.博客管理</a></li>
+			<li><a href="{{ url_for('comment_list') }}">3.评论管理</a></li>
+		</ul>
+	</div>
+</div>
+{% endblock %}
