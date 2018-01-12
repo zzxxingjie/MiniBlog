@@ -1,0 +1,18 @@
+ul li{
+	list-style-type: none;
+}
+a:hover,a:visited{
+	text-decoration: none;
+}
+.navbar{
+	border-radius: 0;
+}
+.friendly_links{
+	padding: 0;
+}
+.friendly_links li{ 
+	background: url('/static/img/link.png') no-repeat left center;
+	padding-left: 25px; 
+	margin: 10px 0;
+	border-bottom: 1px solid #eee;
+}
