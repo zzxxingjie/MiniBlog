@@ -1,5 +1,6 @@
 # MiniBlog
-小型blog系统，有点简陋
+<h1>小型blog系统，有点简陋</h1>
+<br>
 使用到的技术：
 1.python 2.7
 2.flask
