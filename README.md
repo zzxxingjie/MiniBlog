@@ -5,3 +5,4 @@
 2.flask
 3.html+css
 4.Bootstrap
+<p>运行方法：python run.py </p>
